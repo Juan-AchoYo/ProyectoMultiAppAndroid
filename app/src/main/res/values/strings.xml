@@ -21,5 +21,6 @@
     
     <!--TOD0 App-->
     <string name="todo_title">jajaja</string>
+    <string name="todo_category">Categorías</string>
 
 </resources>
