@@ -25,14 +25,6 @@ class TodoActivity : AppCompatActivity() {
     private val categories = listOf(
         Personal,
         Business,
-        Personal,
-        Business,
-        Personal,
-        Business,
-        Personal,
-        Business,
-        Personal,
-        Business,
         Other
     )
 
@@ -40,13 +32,6 @@ class TodoActivity : AppCompatActivity() {
         Task("Recoger el recogedor", Other, false),
         Task("Subir de subidón", Business, false),
         Task("Gestionar el maquineo", Personal, false),
-        Task("Vivir la vier el recogedor", Other, false),
-        Task("Subir de subidón", Business, false),
-        Task("Gestionar el maquineo", Personal, false),
-        Task("Vivir la vier el recogedor", Other, false),
-        Task("Subir de subidón", Business, false),
-        Task("Gestionar el maquineo", Personal, false),
-        Task("Vivir la vida loca soñando", Other, false)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,22 +50,31 @@ class TodoActivity : AppCompatActivity() {
 
     private fun initUI() {
 
-        categoriesAdapter = CategoriesAdapter(categories)
+        categoriesAdapter = CategoriesAdapter(categories){updateCategories(it)}
         rvCategories.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvCategories.adapter = categoriesAdapter
 
-        tasksAdapter = TasksAdapter(tasks)
+        tasksAdapter = TasksAdapter(tasks) { onItemSelected(it) }
         rvTasks.layoutManager = LinearLayoutManager(this)
         rvTasks.adapter = tasksAdapter
-
-
     }
-
     private fun initListeners() {
         fabAddTask.setOnClickListener {
             showDialog()
         }
+    }
+
+    private fun updateCategories(position:Int){
+        categories[position].isSelected = !categories[position].isSelected
+        categoriesAdapter.notifyItemChanged(position)
+        updateTasks()
+    }
+    private fun updateTasks() {
+        val selectedCategories:List<TaskCategory> = categories.filter { it.isSelected }
+        val newTasks: List<Task> = tasks.filter { selectedCategories.contains(it.category)}
+        tasksAdapter.tasks = newTasks
+        tasksAdapter.notifyDataSetChanged()
     }
 
     private fun showDialog() {
@@ -90,22 +84,26 @@ class TodoActivity : AppCompatActivity() {
         val etTask: EditText = dialog.findViewById(R.id.etTask)
         val rgCategories: RadioGroup = dialog.findViewById(R.id.rgCategories)
         btnAddTask.setOnClickListener {
-            val selectedId = rgCategories.checkedRadioButtonId
-            val selectedRadioButton: RadioButton = rgCategories.findViewById(selectedId)
-            val currentCategory: TaskCategory = when (selectedRadioButton.text) {
-                getString(R.string.todo_dialog_business) -> Business
-                getString(R.string.todo_dialog_personal) -> Personal
-                else -> {
-                    Other
+            val currentTask = etTask.text.toString()
+            if (currentTask.isNotEmpty()) {
+                val selectedId = rgCategories.checkedRadioButtonId
+                val selectedRadioButton: RadioButton = rgCategories.findViewById(selectedId)
+                val currentCategory: TaskCategory = when (selectedRadioButton.text) {
+                    getString(R.string.todo_dialog_business) -> Business
+                    getString(R.string.todo_dialog_personal) -> Personal
+                    else -> {
+                        Other
+                    }
                 }
+                tasks.add(Task(currentTask, currentCategory))
+                updateTasks()
+                dialog.hide()
             }
-            tasks.add(Task(etTask.text.toString(),currentCategory))
-            updateTasks()
-            dialog.hide()
         }
         dialog.show()
     }
-    private fun updateTasks(){
-        tasksAdapter.notifyDataSetChanged()
+    private fun onItemSelected(postion: Int) {
+        tasks[postion].isSelected = !tasks[postion].isSelected
+        updateTasks()
     }
 }
