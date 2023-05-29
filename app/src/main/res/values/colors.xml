@@ -34,6 +34,10 @@
     <color name="todo_personal_category">#00BCD4</color>
     <color name="todo_other_category">#4CAF50</color>
 
+    <!--PodcastsApp-->
+    <color name="pod_background_card">#8E99D8</color>
+    <color name="pod_subtitle_text">#212539</color>
+    <color name="pod_accent">#BCA04B</color>
 
 
 </resources>
