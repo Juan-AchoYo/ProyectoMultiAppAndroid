@@ -39,5 +39,8 @@
     <color name="pod_subtitle_text">#212539</color>
     <color name="pod_accent">#BCA04B</color>
 
+    
+    <!--SuperHeroApp-->
+    <color name="super_hero_item_name">#B5009688</color>
 
 </resources>
