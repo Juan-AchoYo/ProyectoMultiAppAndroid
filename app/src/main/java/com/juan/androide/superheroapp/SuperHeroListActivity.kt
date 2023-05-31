@@ -24,7 +24,6 @@ class SuperHeroListActivity : AppCompatActivity() {
     private lateinit var adapter: SuperHeroAdapter
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySuperHeroListBinding.inflate(layoutInflater)
@@ -48,7 +47,7 @@ class SuperHeroListActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?) = false
         })
 
-        adapter = SuperHeroAdapter()
+        adapter = SuperHeroAdapter { id -> navigateToDetail(id) }
         binding.rvSuperHero.setHasFixedSize(true)
         binding.rvSuperHero.layoutManager = LinearLayoutManager(this)
         binding.rvSuperHero.adapter = adapter
@@ -81,8 +80,8 @@ class SuperHeroListActivity : AppCompatActivity() {
             .build()
     }
 
-    private fun navigateToDetail(id:String){
-        val intent= Intent(this, DetailSuperHeroActivity::class.java)
+    private fun navigateToDetail(id: String) {
+        val intent = Intent(this, DetailSuperHeroActivity::class.java)
         intent.putExtra(EXTRA_ID, id)
         startActivity(intent)
     }
