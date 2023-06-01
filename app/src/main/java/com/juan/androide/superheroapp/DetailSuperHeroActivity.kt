@@ -3,7 +3,9 @@ package com.juan.androide.superheroapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import androidx.core.view.isVisible
 import com.juan.androide.R
 import com.juan.androide.databinding.ActivityDetailSuperHeroBinding
@@ -15,6 +17,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import kotlin.math.roundToInt
 
 class DetailSuperHeroActivity : AppCompatActivity() {
 
@@ -48,6 +51,30 @@ class DetailSuperHeroActivity : AppCompatActivity() {
     private fun createUI(superHero: SuperHeroDetailResponse) {
         Picasso.get().load(superHero.image.url).into(binding.ivSuperHero)
         binding.tvSuperHeroDetail.text = superHero.name
+        prepareStats(superHero.powerstats)
+        binding.tvSuperHeroRealName.text = superHero.biography.fullName
+        binding.tvPublisher.text = superHero.biography.publisher
+    }
+
+    private fun prepareStats(powerstats: PowerStatsResponse) {
+        updateHeight(binding.viewIntelligence, powerstats.intelligence)
+        updateHeight(binding.viewStrength, powerstats.strength)
+        updateHeight(binding.viewSpeed, powerstats.speed)
+        updateHeight(binding.viewDurability, powerstats.durability)
+        updateHeight(binding.viewPower, powerstats.power)
+        updateHeight(binding.viewCombat, powerstats.combat)
+
+    }
+
+    private fun updateHeight(view: View, stat: String) {
+        val params = view.layoutParams
+        params.height = pxToDp(stat.toFloat())
+        view.layoutParams = params
+    }
+
+    private fun pxToDp(px: Float): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, resources.displayMetrics)
+            .roundToInt()
     }
 
     private fun getRetrofit(): Retrofit {

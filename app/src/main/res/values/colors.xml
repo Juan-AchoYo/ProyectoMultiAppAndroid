@@ -42,5 +42,8 @@
     
     <!--SuperHeroApp-->
     <color name="super_hero_item_name">#B5009688</color>
+    <color name="color_super_hero_stats_1">#673AB7</color>
+    <color name="color_super_hero_stats_2">#2196F3</color>
+
 
 </resources>
