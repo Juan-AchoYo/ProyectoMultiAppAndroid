@@ -29,5 +29,11 @@
     <string name="todo_dialog_personal">Personal</string>
     <string name="todo_dialog_other">Otros</string>
     <string name="todo_dialog_button">Crear tarea</string>
+    <string name="settings_dark_mode">Modo oscuro</string>
+    <string name="settings_dark_mode_description">Cambia a modo oscuro</string>
+    <string name="settings_bluetooth">Bluetooth</string>
+    <string name="settings_bluetooth_description">Activar el bluetooth</string>
+    <string name="settings_vibration">Vibración</string>
+    <string name="settings_volume">Volumen</string>
 
 </resources>
