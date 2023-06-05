@@ -13,4 +13,22 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.TodoApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#4DAAF4</item>
+        <item name="colorPrimaryVariant">#2479BC</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#985D07</item>
+        <item name="colorSecondaryVariant">#7C4F0D</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/todo_background_todo_app</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="TodoSubtitle">
+        <item name="textAllCaps">true</item>
+        <item name="android:layout_marginHorizontal">32dp</item>
+        <item name="android:textColor">@color/todo_subtitle_text</item>
+    </style>
 </resources>

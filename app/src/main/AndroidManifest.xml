@@ -24,9 +24,6 @@
             android:name=".superheroapp.SuperHeroListActivity"
             android:exported="false" />
         <activity
-            android:name=".podcastsapp.PodcastsActivity"
-            android:exported="false" />
-        <activity
             android:name=".todoapp.TodoActivity"
             android:exported="false"
             android:theme="@style/Theme.TodoApp" />

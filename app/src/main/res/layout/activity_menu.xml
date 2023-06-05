@@ -23,11 +23,6 @@
         android:layout_height="wrap_content"
         android:text="TODO App" />
     <Button
-        android:id="@+id/btnPodcastsApp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Podcasts App" />
-    <Button
         android:id="@+id/btnSuperHeroApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
